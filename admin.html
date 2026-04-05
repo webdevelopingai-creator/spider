@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Dashboard — Manage your Spider-Man themed portfolio.">
+  <title>Admin Dashboard | Spider Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body style="cursor: default;">
+
+  <!-- Web Background -->
+  <div class="web-background"></div>
+
+  <!-- ============ LOGIN PAGE ============ -->
+  <div class="admin-login-page" id="loginPage">
+    <div class="admin-login-card">
+      <h1>🕷️ Admin</h1>
+      <p class="login-subtitle">Enter your credentials to access the dashboard</p>
+      <form class="login-form" onsubmit="handleLogin(event)">
+        <input type="text" id="loginUsername" placeholder="Username" autocomplete="username" required>
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+        <p class="login-error" id="loginError">Invalid credentials. Try again.</p>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </form>
+      <br>
+      <a href="index.html" class="back-to-site"><i class="fas fa-arrow-left"></i> Back to Site</a>
+    </div>
+  </div>
+
+  <!-- ============ DASHBOARD ============ -->
+  <div class="admin-dashboard" id="adminDashboard">
+
+    <!-- Mobile Toggle -->
+    <button class="admin-mobile-toggle" id="adminMobileToggle" onclick="toggleAdminSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Overlay -->
+    <div class="admin-overlay" id="adminOverlay" onclick="toggleAdminSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-logo">
+        <h2>🕷️ SPIDER<span style="color:#1e90ff;">DEV</span></h2>
+        <span>ADMIN PANEL</span>
+      </div>
+      <ul class="admin-nav">
+        <li><a class="active" onclick="switchPanel('overview')"><span class="nav-icon">📊</span> Overview</a></li>
+        <li><a onclick="switchPanel('hero')"><span class="nav-icon">🏠</span> Hero Section</a></li>
+        <li><a onclick="switchPanel('about')"><span class="nav-icon">👤</span> About Section</a></li>
+        <li><a onclick="switchPanel('projects')"><span class="nav-icon">📁</span> Projects</a></li>
+        <li><a onclick="switchPanel('videosPanel')"><span class="nav-icon">🎬</span> Videos</a></li>
+        <li><a onclick="switchPanel('contact')"><span class="nav-icon">📬</span> Contact Info</a></li>
+        <li><a onclick="switchPanel('theme')"><span class="nav-icon">🎨</span> Theme Colors</a></li>
+      </ul>
+      <button class="logout-btn" onclick="handleLogout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      <div class="admin-header">
+        <h1 id="panelTitle">Dashboard Overview</h1>
+        <div class="admin-user">
+          <span id="adminGreeting">Welcome, Admin</span>
+          <div class="avatar">A</div>
+        </div>
+      </div>
+
+      <!-- ---- OVERVIEW PANEL ---- -->
+      <div class="admin-panel active" id="panel-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📁</div>
+            <div class="stat-number" id="statProjects">0</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎬</div>
+            <div class="stat-number" id="statVideos">0</div>
+            <div class="stat-label">Videos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💬</div>
+            <div class="stat-number" id="statMessages">0</div>
+            <div class="stat-label">Messages</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👁️</div>
+            <div class="stat-number" id="statVisits">1,247</div>
+            <div class="stat-label">Site Visits</div>
+          </div>
+        </div>
+        <div class="admin-panel active" style="border:none;padding:0;margin-top:10px;">
+          <h2>Recent Messages</h2>
+          <div class="admin-items-list" id="messagesList">
+            <p style="color:var(--text-muted);">No messages yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- HERO PANEL ---- -->
+      <div class="admin-panel" id="panel-hero">
+        <h2>Edit Hero Section</h2>
+        <form class="admin-form" onsubmit="saveHero(event)">
+          <div>
+            <label>Main Title</label>
+            <input type="text" id="adminHeroTitle" placeholder="I am Spider Dev">
+          </div>
+          <div>
+            <label>Subtitle</label>
+            <input type="text" id="adminHeroSubtitle" placeholder="Friendly Neighborhood Developer">
+          </div>
+          <div>
+            <label>Tagline</label>
+            <textarea id="adminHeroTagline" placeholder="A short description..."></textarea>
+          </div>
+          <button type="submit" class="btn-admin primary">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+
+      <!-- ---- ABOUT PANEL ---- -->
+      <div class="admin-panel" id="panel-about">
+        <h2>Edit About Section</h2>
+        <form class="admin-form" onsubmit="saveAbout(event)">
+          <div>
+            <label>Section Title</label>
+            <input type="text" id="adminAboutTitle" placeholder="Who Am I?">
+          </div>
+          <div>
+            <label>Bio Text</label>
+            <textarea id="adminAboutBio" rows="5" placeholder="Write about yourself..."></textarea>
+          </div>
+          <button type="submit" class="btn-admin primary">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+
+      <!-- ---- PROJECTS PANEL ---- -->
+      <div class="admin-panel" id="panel-projects">
+        <h2>Manage Projects</h2>
+        <form class="admin-form" onsubmit="addProject(event)">
+          <div>
+            <label>Project Title</label>
+            <input type="text" id="projectTitle" placeholder="Project Name" required>
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea id="projectDesc" placeholder="Short description..." required></textarea>
+          </div>
+          <div>
+            <label>Image URL</label>
+            <input type="text" id="projectImage" placeholder="https://...">
+          </div>
+          <div>
+            <label>Technologies (comma separated)</label>
+            <input type="text" id="projectTech" placeholder="React, Node, MongoDB">
+          </div>
+          <div>
+            <label>Live Demo URL</label>
+            <input type="text" id="projectLive" placeholder="https://...">
+          </div>
+          <div>
+            <label>Source Code URL</label>
+            <input type="text" id="projectCode" placeholder="https://github.com/...">
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button type="submit" class="btn-admin primary">
+              <i class="fas fa-plus"></i> Add Project
+            </button>
+            <button type="button" class="btn-admin secondary" onclick="clearProjectForm()">
+              Clear
+            </button>
+          </div>
+        </form>
+        <div class="admin-items-list" id="adminProjectsList"></div>
+      </div>
+
+      <!-- ---- VIDEOS PANEL ---- -->
+      <div class="admin-panel" id="panel-videosPanel">
+        <h2>Manage Videos</h2>
+        <form class="admin-form" onsubmit="addVideo(event)">
+          <div>
+            <label>Video Title</label>
+            <input type="text" id="videoTitle" placeholder="Video Title" required>
+          </div>
+          <div>
+            <label>YouTube Video ID or URL</label>
+            <input type="text" id="videoUrl" placeholder="dQw4w9WgXcQ or full URL" required>
+          </div>
+          <div>
+            <label>Description (optional)</label>
+            <input type="text" id="videoDesc" placeholder="Short description">
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button type="submit" class="btn-admin primary">
+              <i class="fas fa-plus"></i> Add Video
+            </button>
+            <button type="button" class="btn-admin secondary" onclick="clearVideoForm()">
+              Clear
+            </button>
+          </div>
+        </form>
+        <div class="admin-items-list" id="adminVideosList"></div>
+      </div>
+
+      <!-- ---- CONTACT PANEL ---- -->
+      <div class="admin-panel" id="panel-contact">
+        <h2>Edit Contact Info</h2>
+        <form class="admin-form" onsubmit="saveContact(event)">
+          <div>
+            <label>Contact Intro Text</label>
+            <textarea id="adminContactText" placeholder="Have a project in mind?..."></textarea>
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" id="adminEmail" placeholder="you@example.com">
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="text" id="adminPhone" placeholder="+1 234 567 890">
+          </div>
+          <div>
+            <label>Location</label>
+            <input type="text" id="adminLocation" placeholder="City, Country">
+          </div>
+          <hr style="border-color: rgba(226,54,54,0.1); margin: 10px 0;">
+          <div>
+            <label>GitHub URL</label>
+            <input type="text" id="adminGithub" placeholder="https://github.com/...">
+          </div>
+          <div>
+            <label>LinkedIn URL</label>
+            <input type="text" id="adminLinkedin" placeholder="https://linkedin.com/in/...">
+          </div>
+          <div>
+            <label>Twitter URL</label>
+            <input type="text" id="adminTwitter" placeholder="https://twitter.com/...">
+          </div>
+          <div>
+            <label>Instagram URL</label>
+            <input type="text" id="adminInstagram" placeholder="https://instagram.com/...">
+          </div>
+          <div>
+            <label>YouTube URL</label>
+            <input type="text" id="adminYoutube" placeholder="https://youtube.com/...">
+          </div>
+          <button type="submit" class="btn-admin primary">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+
+      <!-- ---- THEME PANEL ---- -->
+      <div class="admin-panel" id="panel-theme">
+        <h2>Theme Customization</h2>
+        <form class="admin-form" onsubmit="saveTheme(event)">
+          <div>
+            <label>Primary Red</label>
+            <div class="color-picker-group">
+              <input type="color" id="themeRed" value="#e23636">
+              <span id="themeRedHex">#e23636</span>
+            </div>
+          </div>
+          <div>
+            <label>Primary Blue</label>
+            <div class="color-picker-group">
+              <input type="color" id="themeBlue" value="#1e90ff">
+              <span id="themeBlueHex">#1e90ff</span>
+            </div>
+          </div>
+          <div>
+            <label>Background Primary</label>
+            <div class="color-picker-group">
+              <input type="color" id="themeBgPrimary" value="#0a0a0f">
+              <span id="themeBgPrimaryHex">#0a0a0f</span>
+            </div>
+          </div>
+          <div>
+            <label>Background Secondary</label>
+            <div class="color-picker-group">
+              <input type="color" id="themeBgSecondary" value="#111118">
+              <span id="themeBgSecondaryHex">#111118</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button type="submit" class="btn-admin primary">
+              <i class="fas fa-save"></i> Apply Theme
+            </button>
+            <button type="button" class="btn-admin danger" onclick="resetTheme()">
+              <i class="fas fa-undo"></i> Reset
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="admin-toast" id="adminToast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spider-Man themed portfolio — Friendly Neighborhood Developer. Projects, skills, and more with immersive 3D effects.">
+  <title>Spider Portfolio | Friendly Neighborhood Developer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-spider"></div>
+    <div class="loading-text">Web-Slinging...</div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- ===== CINEMATIC FULL-SCREEN BACKGROUND ===== -->
+  <div class="cinematic-bg" id="cinematicBg">
+    <!-- Layer 1: Base Background Image -->
+    <div class="cine-layer cine-image" id="cineImage">
+      <img src="spider-hero-bg.png" alt="Spider Hero" id="cineBgImg">
+    </div>
+    <!-- Layer 2: Cinematic Dark Gradient Overlay -->
+    <div class="cine-layer cine-gradient-overlay"></div>
+    <!-- Layer 3: Red & Blue Glow Edges -->
+    <div class="cine-layer cine-glow-edges"></div>
+    <!-- Layer 4: Animated Vignette -->
+    <div class="cine-layer cine-vignette"></div>
+    <!-- Layer 5: Web Pattern Overlay -->
+    <div class="cine-layer cine-web-pattern"></div>
+    <!-- Layer 6: Floating Particles Canvas -->
+    <canvas class="cine-layer cine-particles" id="cineParticlesCanvas"></canvas>
+    <!-- Layer 7: Scanlines -->
+    <div class="cine-layer cine-scanlines"></div>
+    <!-- Layer 8: Film Grain -->
+    <div class="cine-layer cine-noise"></div>
+    <!-- Glow Orbs Container -->
+    <div id="cineOrbsContainer"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo">SPIDER<span>DEV</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" onclick="closeNav()">Home</a></li>
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+      <li><a href="#videos" onclick="closeNav()">Videos</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ============ HERO SECTION ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-content reveal">
+      <div class="hero-badge">🕷️ Portfolio 2026</div>
+      <h1 class="hero-title" id="heroTitle">I am Spider Dev</h1>
+      <p class="hero-subtitle" id="heroSubtitle">Friendly Neighborhood Developer</p>
+      <p class="hero-tagline" id="heroTagline">Crafting web experiences with the precision of a spider's web and the power of cutting-edge technology.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-rocket"></i> View Projects
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-envelope"></i> Get In Touch
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-mouse"></div>
+      <span>Scroll Down</span>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section class="about" id="about">
+    <h2 class="section-title reveal"><span>About</span> Me</h2>
+    <div class="about-container">
+      <div class="about-image reveal">
+        <div class="about-image-frame">
+          <div class="about-placeholder">🕷️</div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <h3 id="aboutTitle">Who Am I?</h3>
+        <p class="about-bio" id="aboutBio">
+          A passionate full-stack developer with a knack for creating immersive web experiences. Like a spider weaving its web, I connect frontend beauty with backend power to build applications that stand out. With expertise in modern frameworks and a love for clean, efficient code, I bring ideas to life pixel by pixel.
+        </p>
+        <div class="skills-grid" id="skillsGrid">
+          <div class="skill-item">
+            <div class="skill-header"><span>JavaScript / TypeScript</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>React / Next.js</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Node.js / Express</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>CSS / Tailwind / SCSS</span><span>92%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Python / Django</span><span>80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Three.js / WebGL</span><span>75%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS SECTION ============ -->
+  <section class="projects" id="projects">
+    <h2 class="section-title reveal">My <span>Projects</span></h2>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Projects are loaded dynamically -->
+    </div>
+  </section>
+
+  <!-- ============ VIDEOS SECTION ============ -->
+  <section class="videos" id="videos">
+    <h2 class="section-title reveal">My <span>Videos</span></h2>
+    <div class="videos-grid" id="videosGrid">
+      <!-- Videos are loaded dynamically -->
+    </div>
+  </section>
+
+  <!-- ============ CONTACT SECTION ============ -->
+  <section class="contact" id="contact">
+    <h2 class="section-title reveal">Get In <span>Touch</span></h2>
+    <div class="contact-container">
+      <div class="contact-info reveal">
+        <h3>Let's Work Together</h3>
+        <p id="contactText">Have a project in mind? Looking for a developer who can bring your vision to life? Drop me a message and let's create something amazing together.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <span id="contactEmail">spiderdev@example.com</span>
+          </div>
+          <div class="contact-detail">
+            <div class="icon"><i class="fas fa-phone"></i></div>
+            <span id="contactPhone">+1 234 567 890</span>
+          </div>
+          <div class="contact-detail">
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <span id="contactLocation">New York City, NY</span>
+          </div>
+        </div>
+        <div class="social-links" id="socialLinks">
+          <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="contact-form-wrapper reveal">
+        <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required id="contactName">
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required id="contactEmailInput">
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subject" id="contactSubject">
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Your Message" required id="contactMessage"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 <span>Spider Dev</span>. All rights reserved. | Built with 🕸️ & ❤️</p>
+  </footer>
+
+  <!-- Admin Float Button -->
+  <a href="admin.html" class="admin-float-btn" title="Admin Panel">
+    <i class="fas fa-cog"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
